@@ -1,6 +1,6 @@
 {
   "name": "react-cron-headless",
-  "version": "5.0.1",
+  "version": "0.0.1",
   "description": "A headless react cron editor",
   "author": "Maksim Kuznetsov (https://github.com/maksimkuznetsov/)",
   "license": "MIT",
