@@ -224,7 +224,7 @@ export interface CronProps {
    */
   locale?: Locale
 
-  components?: Partial<Elements>;
+  components?: CronComponents;
 }
 export interface Locale {
   everyText?: string
@@ -488,12 +488,12 @@ export interface BaseOptionType {
   [name: string]: any
 }
 
-export type Elements = {
-  PeriodField: ComponentType<PeriodProps>
-  Select: ComponentType<CustomSelectProps>
-  MinutesField: ComponentType<MinutesProps>
-  HoursField: ComponentType<HoursProps>
-  WeekDaysField: ComponentType<WeekDaysProps>
-  MonthDaysField: ComponentType<MonthDaysProps>
-  MonthsField: ComponentType<MonthsProps>
+export type CronComponents = {
+  PeriodField?: ComponentType<PeriodProps>
+  Select?: ComponentType<CustomSelectProps>
+  MinutesField?: ComponentType<MinutesProps>
+  HoursField?: ComponentType<HoursProps>
+  WeekDaysField?: ComponentType<WeekDaysProps>
+  MonthDaysField?: ComponentType<MonthDaysProps>
+  MonthsField?: ComponentType<MonthsProps>
 }

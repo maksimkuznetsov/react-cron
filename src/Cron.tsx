@@ -392,62 +392,56 @@ export default function Cron(props: CronProps) {
               />
             )}
 
-          <div>
-            {periodForRender !== 'minute' &&
-              periodForRender !== 'hour' &&
-              allowedDropdowns.includes('hours') && (
-                <HoursField
-                  value={hours}
-                  setValue={setHours}
-                  locale={locale}
-                  className={className}
-                  disabled={dropdownsConfig?.hours?.disabled ?? disabled}
-                  readOnly={dropdownsConfig?.hours?.readOnly ?? readOnly}
-                  leadingZero={
-                    dropdownsConfig?.hours?.leadingZero ?? leadingZero
-                  }
-                  clockFormat={clockFormat}
-                  period={periodForRender}
-                  periodicityOnDoubleClick={
-                    dropdownsConfig?.hours?.periodicityOnDoubleClick ??
-                    periodicityOnDoubleClick
-                  }
-                  mode={dropdownsConfig?.hours?.mode ?? mode}
-                  allowClear={dropdownsConfig?.hours?.allowClear ?? allowClear}
-                  filterOption={dropdownsConfig?.hours?.filterOption}
-                  SelectComponent={Select}
-                />
-              )}
+          {periodForRender !== 'minute' &&
+            periodForRender !== 'hour' &&
+            allowedDropdowns.includes('hours') && (
+              <HoursField
+                value={hours}
+                setValue={setHours}
+                locale={locale}
+                className={className}
+                disabled={dropdownsConfig?.hours?.disabled ?? disabled}
+                readOnly={dropdownsConfig?.hours?.readOnly ?? readOnly}
+                leadingZero={dropdownsConfig?.hours?.leadingZero ?? leadingZero}
+                clockFormat={clockFormat}
+                period={periodForRender}
+                periodicityOnDoubleClick={
+                  dropdownsConfig?.hours?.periodicityOnDoubleClick ??
+                  periodicityOnDoubleClick
+                }
+                mode={dropdownsConfig?.hours?.mode ?? mode}
+                allowClear={dropdownsConfig?.hours?.allowClear ?? allowClear}
+                filterOption={dropdownsConfig?.hours?.filterOption}
+                SelectComponent={Select}
+              />
+            )}
 
-            {periodForRender !== 'minute' &&
-              allowedDropdowns.includes('minutes') && (
-                <MinutesField
-                  value={minutes}
-                  setValue={setMinutes}
-                  locale={locale}
-                  period={periodForRender}
-                  className={className}
-                  disabled={dropdownsConfig?.minutes?.disabled ?? disabled}
-                  readOnly={dropdownsConfig?.minutes?.readOnly ?? readOnly}
-                  leadingZero={
-                    dropdownsConfig?.minutes?.leadingZero ?? leadingZero
-                  }
-                  clockFormat={clockFormat}
-                  periodicityOnDoubleClick={
-                    dropdownsConfig?.minutes?.periodicityOnDoubleClick ??
-                    periodicityOnDoubleClick
-                  }
-                  mode={dropdownsConfig?.minutes?.mode ?? mode}
-                  allowClear={
-                    dropdownsConfig?.minutes?.allowClear ?? allowClear
-                  }
-                  filterOption={dropdownsConfig?.minutes?.filterOption}
-                  SelectComponent={Select}
-                />
-              )}
+          {periodForRender !== 'minute' &&
+            allowedDropdowns.includes('minutes') && (
+              <MinutesField
+                value={minutes}
+                setValue={setMinutes}
+                locale={locale}
+                period={periodForRender}
+                className={className}
+                disabled={dropdownsConfig?.minutes?.disabled ?? disabled}
+                readOnly={dropdownsConfig?.minutes?.readOnly ?? readOnly}
+                leadingZero={
+                  dropdownsConfig?.minutes?.leadingZero ?? leadingZero
+                }
+                clockFormat={clockFormat}
+                periodicityOnDoubleClick={
+                  dropdownsConfig?.minutes?.periodicityOnDoubleClick ??
+                  periodicityOnDoubleClick
+                }
+                mode={dropdownsConfig?.minutes?.mode ?? mode}
+                allowClear={dropdownsConfig?.minutes?.allowClear ?? allowClear}
+                filterOption={dropdownsConfig?.minutes?.filterOption}
+                SelectComponent={Select}
+              />
+            )}
 
-            {clearButtonNode}
-          </div>
+          {clearButtonNode}
         </>
       )}
     </div>
