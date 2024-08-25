@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 
-import CustomSelect from '../components/CustomSelect'
 import { UNITS } from '../constants'
 import { DEFAULT_LOCALE_EN } from '../locale'
 import { MonthsProps } from '../types'
@@ -20,6 +19,7 @@ export default function Months(props: MonthsProps) {
     mode,
     allowClear,
     filterOption,
+    SelectComponent,
   } = props
   const optionsList = locale.months || DEFAULT_LOCALE_EN.months
 
@@ -40,7 +40,7 @@ export default function Months(props: MonthsProps) {
         <span>{locale.prefixMonths || DEFAULT_LOCALE_EN.prefixMonths}</span>
       )}
 
-      <CustomSelect
+      <SelectComponent
         placeholder={locale.emptyMonths || DEFAULT_LOCALE_EN.emptyMonths}
         optionsList={optionsList}
         grid={false}

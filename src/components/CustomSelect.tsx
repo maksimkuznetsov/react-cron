@@ -1,5 +1,5 @@
-import { Select } from 'antd'
-import React, { useCallback, useMemo, useRef } from 'react'
+// import { Select } from 'antd'
+import React, { Fragment, useCallback, useMemo, useRef } from 'react'
 
 import { formatValue, parsePartArray, partToString } from '../converter'
 import { DEFAULT_LOCALE_EN } from '../locale'
@@ -23,6 +23,7 @@ export default function CustomSelect(props: CustomSelectProps) {
     unit,
     periodicityOnDoubleClick,
     mode,
+    placeholder,
     allowClear,
     filterOption = () => true,
     ...otherProps
@@ -250,41 +251,78 @@ export default function CustomSelect(props: CustomSelectProps) {
   )
 
   return (
-    <Select<string[] | undefined>
-      // Use 'multiple' instead of 'tags‘ mode
-      // cf: Issue #2
-      mode={
-        mode === 'single' && !periodicityOnDoubleClick ? undefined : 'multiple'
-      }
-      allowClear={allowClear ?? !readOnly}
-      virtual={false}
-      open={readOnly ? false : undefined}
-      value={stringValue}
-      onClear={onClear}
-      tagRender={renderTag}
-      className={internalClassName}
-      popupClassName={popupClassName}
-      options={options}
-      showSearch={false}
-      suffixIcon={readOnly ? null : undefined}
-      menuItemSelectedIcon={null}
-      popupMatchSelectWidth={false}
-      onSelect={onOptionClick}
-      onDeselect={onOptionClick}
-      disabled={disabled}
-      dropdownAlign={
-        (unit.type === 'minutes' || unit.type === 'hours') &&
-        period !== 'day' &&
-        period !== 'hour'
-          ? {
-              // Usage: https://github.com/yiminghe/dom-align
-              // Set direction to left to prevent dropdown to overlap window
-              points: ['tr', 'br'],
-            }
-          : undefined
-      }
-      data-testid={`custom-select-${unit.type}`}
-      {...otherProps}
-    />
+    <div>
+      <div data-testid={`custom-select-value-${unit.type}`}>
+        {stringValue?.length ? (
+          <>
+            {stringValue?.map((item) => (
+              <Fragment key={item}>
+                {renderTag({
+                  value: [item],
+                })}
+              </Fragment>
+            ))}
+          </>
+        ) : (
+          placeholder
+        )}
+      </div>
+      {!disabled && !readOnly && (
+        <select
+          disabled={disabled}
+          data-testid={`custom-select-${unit.type}`}
+          onChange={(e) => onOptionClick(e.currentTarget.value)}
+          value={stringValue ?? []}
+          multiple={
+            mode === 'single' && !periodicityOnDoubleClick ? undefined : true
+          }
+        >
+          {options.map((item) => (
+            <option key={item.value} value={item.value}>
+              {item.label}
+            </option>
+          ))}
+        </select>
+      )}
+    </div>
   )
+
+  // return (
+  //   <Select<string[] | undefined>
+  //     // Use 'multiple' instead of 'tags‘ mode
+  //     // cf: Issue #2
+  //     mode={
+  //       mode === 'single' && !periodicityOnDoubleClick ? undefined : 'multiple'
+  //     }
+  //     allowClear={allowClear ?? !readOnly}
+  //     virtual={false}
+  //     open={readOnly ? false : undefined}
+  //     value={stringValue}
+  //     onClear={onClear}
+  //     tagRender={renderTag}
+  //     className={internalClassName}
+  //     popupClassName={popupClassName}
+  //     options={options}
+  //     showSearch={false}
+  //     suffixIcon={readOnly ? null : undefined}
+  //     menuItemSelectedIcon={null}
+  //     popupMatchSelectWidth={false}
+  //     onSelect={onOptionClick}
+  //     onDeselect={onOptionClick}
+  //     disabled={disabled}
+  //     dropdownAlign={
+  //       (unit.type === 'minutes' || unit.type === 'hours') &&
+  //       period !== 'day' &&
+  //       period !== 'hour'
+  //         ? {
+  //             // Usage: https://github.com/yiminghe/dom-align
+  //             // Set direction to left to prevent dropdown to overlap window
+  //             points: ['tr', 'br'],
+  //           }
+  //         : undefined
+  //     }
+  //     data-testid={`custom-select-${unit.type}`}
+  //     {...otherProps}
+  //   />
+  // )
 }

@@ -1,9 +1,7 @@
-import { Select } from 'antd'
-import { BaseOptionType } from 'antd/es/select'
 import React, { useCallback, useMemo } from 'react'
 
 import { DEFAULT_LOCALE_EN } from '../locale'
-import { PeriodProps, PeriodType } from '../types'
+import { BaseOptionType, PeriodProps, PeriodType } from '../types'
 import { classNames } from '../utils'
 
 export default function Period(props: PeriodProps) {
@@ -16,7 +14,7 @@ export default function Period(props: PeriodProps) {
     readOnly,
     shortcuts,
     allowedPeriods,
-    allowClear,
+    // allowClear,
   } = props
   const options: BaseOptionType[] = []
 
@@ -93,26 +91,26 @@ export default function Period(props: PeriodProps) {
     [className]
   )
 
-  const selectClassName = useMemo(
-    () =>
-      classNames({
-        'react-js-cron-select': true,
-        'react-js-cron-select-no-prefix': locale.prefixPeriod === '',
-        [`${className}-select`]: !!className,
-      }),
-    [className, locale.prefixPeriod]
-  )
+  // const selectClassName = useMemo(
+  //   () =>
+  //     classNames({
+  //       'react-js-cron-select': true,
+  //       'react-js-cron-select-no-prefix': locale.prefixPeriod === '',
+  //       [`${className}-select`]: !!className,
+  //     }),
+  //   [className, locale.prefixPeriod]
+  // )
 
-  const popupClassName = useMemo(
-    () =>
-      classNames({
-        'react-js-cron-select-dropdown': true,
-        'react-js-cron-select-dropdown-period': true,
-        [`${className}-select-dropdown`]: !!className,
-        [`${className}-select-dropdown-period`]: !!className,
-      }),
-    [className]
-  )
+  // const popupClassName = useMemo(
+  //   () =>
+  //     classNames({
+  //       'react-js-cron-select-dropdown': true,
+  //       'react-js-cron-select-dropdown-period': true,
+  //       [`${className}-select-dropdown`]: !!className,
+  //       [`${className}-select-dropdown-period`]: !!className,
+  //     }),
+  //   [className]
+  // )
 
   return (
     <div className={internalClassName}>
@@ -120,7 +118,7 @@ export default function Period(props: PeriodProps) {
         <span>{locale.prefixPeriod || DEFAULT_LOCALE_EN.prefixPeriod}</span>
       )}
 
-      <Select<PeriodType, BaseOptionType>
+      {/* <Select<PeriodType, BaseOptionType>
         key={JSON.stringify(locale)}
         defaultValue={value}
         value={value}
@@ -133,7 +131,19 @@ export default function Period(props: PeriodProps) {
         open={readOnly ? false : undefined}
         data-testid='select-period'
         allowClear={allowClear}
-      />
+      /> */}
+      <select
+        data-testid='select-period'
+        value={value}
+        disabled={disabled}
+        onChange={(e) => handleChange(e.currentTarget.value as PeriodType)}
+      >
+        {options.map((item) => (
+          <option key={item.value} value={item.value}>
+            {item.label}
+          </option>
+        ))}
+      </select>
     </div>
   )
 }

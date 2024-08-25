@@ -1,6 +1,6 @@
-import { Button } from 'antd'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
+import CustomSelect from './components/CustomSelect'
 import { getCronStringFromValues, setValuesFromCronString } from './converter'
 import Hours from './fields/Hours'
 import Minutes from './fields/Minutes'
@@ -61,6 +61,7 @@ export default function Cron(props: CronProps) {
     ],
     allowClear,
     dropdownsConfig,
+    components = {},
   } = props
   const internalValueRef = useRef<string>(value)
   const defaultPeriodRef = useRef<PeriodType>(defaultPeriod)
@@ -74,6 +75,16 @@ export default function Cron(props: CronProps) {
   const [valueCleared, setValueCleared] = useState<boolean>(false)
   const previousValueCleared = usePrevious(valueCleared)
   const localeJSON = JSON.stringify(locale)
+
+  const {
+    HoursField = Hours,
+    MinutesField = Minutes,
+    MonthDaysField = MonthDays,
+    MonthsField = Months,
+    PeriodField = Period,
+    WeekDaysField = WeekDays,
+    Select = CustomSelect,
+  } = components
 
   useEffect(
     () => {
@@ -250,16 +261,17 @@ export default function Cron(props: CronProps) {
     () => {
       if (clearButton && !readOnly) {
         return (
-          <Button
+          <button
+            type='button'
             className={clearButtonClassName}
-            danger
-            type='primary'
+            // danger
+            // type='primary'
             disabled={disabled}
             {...otherClearButtonProps}
             onClick={handleClear}
           >
             {locale.clearButtonText || DEFAULT_LOCALE_EN.clearButtonText}
-          </Button>
+          </button>
         )
       }
 
@@ -282,7 +294,7 @@ export default function Cron(props: CronProps) {
   return (
     <div className={internalClassName}>
       {allowedDropdowns.includes('period') && (
-        <Period
+        <PeriodField
           value={periodForRender}
           setValue={setPeriod}
           locale={locale}
@@ -301,7 +313,7 @@ export default function Cron(props: CronProps) {
         <>
           {periodForRender === 'year' &&
             allowedDropdowns.includes('months') && (
-              <Months
+              <MonthsField
                 value={months}
                 setValue={setMonths}
                 locale={locale}
@@ -319,12 +331,13 @@ export default function Cron(props: CronProps) {
                 mode={dropdownsConfig?.months?.mode ?? mode}
                 allowClear={dropdownsConfig?.months?.allowClear ?? allowClear}
                 filterOption={dropdownsConfig?.months?.filterOption}
+                SelectComponent={Select}
               />
             )}
 
           {(periodForRender === 'year' || periodForRender === 'month') &&
             allowedDropdowns.includes('month-days') && (
-              <MonthDays
+              <MonthDaysField
                 value={monthDays}
                 setValue={setMonthDays}
                 locale={locale}
@@ -345,6 +358,7 @@ export default function Cron(props: CronProps) {
                   dropdownsConfig?.['month-days']?.allowClear ?? allowClear
                 }
                 filterOption={dropdownsConfig?.['month-days']?.filterOption}
+                SelectComponent={Select}
               />
             )}
 
@@ -352,7 +366,7 @@ export default function Cron(props: CronProps) {
             periodForRender === 'month' ||
             periodForRender === 'week') &&
             allowedDropdowns.includes('week-days') && (
-              <WeekDays
+              <WeekDaysField
                 value={weekDays}
                 setValue={setWeekDays}
                 locale={locale}
@@ -374,6 +388,7 @@ export default function Cron(props: CronProps) {
                   dropdownsConfig?.['week-days']?.allowClear ?? allowClear
                 }
                 filterOption={dropdownsConfig?.['week-days']?.filterOption}
+                SelectComponent={Select}
               />
             )}
 
@@ -381,7 +396,7 @@ export default function Cron(props: CronProps) {
             {periodForRender !== 'minute' &&
               periodForRender !== 'hour' &&
               allowedDropdowns.includes('hours') && (
-                <Hours
+                <HoursField
                   value={hours}
                   setValue={setHours}
                   locale={locale}
@@ -400,12 +415,13 @@ export default function Cron(props: CronProps) {
                   mode={dropdownsConfig?.hours?.mode ?? mode}
                   allowClear={dropdownsConfig?.hours?.allowClear ?? allowClear}
                   filterOption={dropdownsConfig?.hours?.filterOption}
+                  SelectComponent={Select}
                 />
               )}
 
             {periodForRender !== 'minute' &&
               allowedDropdowns.includes('minutes') && (
-                <Minutes
+                <MinutesField
                   value={minutes}
                   setValue={setMinutes}
                   locale={locale}
@@ -426,6 +442,7 @@ export default function Cron(props: CronProps) {
                     dropdownsConfig?.minutes?.allowClear ?? allowClear
                   }
                   filterOption={dropdownsConfig?.minutes?.filterOption}
+                  SelectComponent={Select}
                 />
               )}
 

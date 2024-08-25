@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 
-import CustomSelect from '../components/CustomSelect'
 import { UNITS } from '../constants'
 import { DEFAULT_LOCALE_EN } from '../locale'
 import { MonthDaysProps } from '../types'
@@ -21,6 +20,7 @@ export default function MonthDays(props: MonthDaysProps) {
     mode,
     allowClear,
     filterOption,
+    SelectComponent,
   } = props
   const noWeekDays = !weekDays || weekDays.length === 0
 
@@ -62,7 +62,7 @@ export default function MonthDays(props: MonthDaysProps) {
         </span>
       )}
 
-      <CustomSelect
+      <SelectComponent
         placeholder={placeholder}
         value={value}
         setValue={setValue}

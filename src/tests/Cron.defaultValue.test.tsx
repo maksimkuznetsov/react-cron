@@ -814,7 +814,7 @@ describe('Cron defaultValue test suite', () => {
       if (monthsSelect) {
         expect(screen.queryByTestId('custom-select-months')).toBeVisible()
         expect(
-          screen.getByTestId('custom-select-months').textContent
+          screen.getByTestId('custom-select-value-months').textContent
         ).toContain(monthsSelect)
       } else {
         expect(screen.queryByTestId(/custom-select-months/i)).toBeNull()
@@ -826,7 +826,7 @@ describe('Cron defaultValue test suite', () => {
       if (monthDaysSelect) {
         expect(screen.queryByTestId('custom-select-month-days')).toBeVisible()
         expect(
-          screen.getByTestId('custom-select-month-days').textContent
+          screen.getByTestId('custom-select-value-month-days').textContent
         ).toContain(monthDaysSelect)
       } else {
         expect(screen.queryByTestId(/custom-select-month-days/i)).toBeNull()
@@ -838,7 +838,7 @@ describe('Cron defaultValue test suite', () => {
       if (weekDaysSelect) {
         expect(screen.queryByTestId('custom-select-week-days')).toBeVisible()
         expect(
-          screen.getByTestId('custom-select-week-days').textContent
+          screen.getByTestId('custom-select-value-week-days').textContent
         ).toContain(weekDaysSelect)
       } else {
         expect(screen.queryByTestId(/custom-select-week-days/i)).toBeNull()
@@ -849,7 +849,7 @@ describe('Cron defaultValue test suite', () => {
 
       if (hoursSelect) {
         expect(screen.queryByTestId('custom-select-hours')).toBeVisible()
-        expect(screen.getByTestId('custom-select-hours').textContent).toContain(
+        expect(screen.getByTestId('custom-select-value-hours').textContent).toContain(
           hoursSelect
         )
       } else {
@@ -862,7 +862,7 @@ describe('Cron defaultValue test suite', () => {
       if (minutesSelect) {
         expect(screen.queryByTestId('custom-select-minutes')).toBeVisible()
         expect(
-          screen.getByTestId('custom-select-minutes').textContent
+          screen.getByTestId('custom-select-value-minutes').textContent
         ).toContain(minutesSelect)
       } else {
         expect(screen.queryByTestId(/custom-select-minutes/i)).toBeNull()

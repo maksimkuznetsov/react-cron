@@ -1,5 +1,4 @@
-import { ButtonProps, SelectProps } from 'antd'
-import { Dispatch, SetStateAction } from 'react'
+import { ComponentType, Dispatch, HTMLAttributes, SetStateAction } from 'react'
 
 // External props
 
@@ -224,6 +223,8 @@ export interface CronProps {
    * Default './src/locale.ts'
    */
   locale?: Locale
+
+  components?: Partial<Elements>;
 }
 export interface Locale {
   everyText?: string
@@ -277,7 +278,8 @@ export type OnError =
   | OnErrorFunction
   | Dispatch<SetStateAction<CronError>>
   | undefined
-export interface ClearButtonProps extends Omit<ButtonProps, 'onClick'> {}
+export interface ClearButtonProps
+  extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick'> {}
 export type ClearButtonAction = 'empty' | 'fill-with-every'
 export type PeriodType =
   | 'year'
@@ -343,6 +345,7 @@ export interface FieldProps {
   mode: Mode
   allowClear?: boolean
   filterOption?: FilterOption
+  SelectComponent: ComponentType<CustomSelectProps>;
 }
 export interface PeriodProps
   extends Omit<
@@ -353,6 +356,7 @@ export interface PeriodProps
     | 'periodicityOnDoubleClick'
     | 'mode'
     | 'filterOption'
+    | 'SelectComponent'
   > {
   value: PeriodType
   setValue: SetValuePeriod
@@ -380,7 +384,7 @@ export interface MinutesProps extends FieldProps {
 }
 export interface CustomSelectProps
   extends Omit<
-    SelectProps<any>,
+    HTMLAttributes<HTMLSelectElement>,
     | 'mode'
     | 'tokenSeparators'
     | 'virtual'
@@ -397,6 +401,7 @@ export interface CustomSelectProps
     | 'onDeselect'
     | 'filterOption'
   > {
+  allowClear?: boolean;
   grid?: boolean
   setValue: SetValueNumbersOrUndefined
   optionsList?: string[]
@@ -477,3 +482,18 @@ export type FilterOption = ({
   value: string
   label: string
 }) => boolean
+
+export interface BaseOptionType {
+  disabled?: boolean
+  [name: string]: any
+}
+
+export type Elements = {
+  PeriodField: ComponentType<PeriodProps>
+  Select: ComponentType<CustomSelectProps>
+  MinutesField: ComponentType<MinutesProps>
+  HoursField: ComponentType<HoursProps>
+  WeekDaysField: ComponentType<WeekDaysProps>
+  MonthDaysField: ComponentType<MonthDaysProps>
+  MonthsField: ComponentType<MonthsProps>
+}

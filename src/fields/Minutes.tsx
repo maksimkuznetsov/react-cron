@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 
-import CustomSelect from '../components/CustomSelect'
 import { UNITS } from '../constants'
 import { DEFAULT_LOCALE_EN } from '../locale'
 import { MinutesProps } from '../types'
@@ -21,6 +20,7 @@ export default function Minutes(props: MinutesProps) {
     mode,
     allowClear,
     filterOption,
+    SelectComponent,
   } = props
   const internalClassName = useMemo(
     () =>
@@ -48,7 +48,7 @@ export default function Minutes(props: MinutesProps) {
             </span>
           )}
 
-      <CustomSelect
+      <SelectComponent
         placeholder={
           period === 'hour'
             ? locale.emptyMinutesForHourPeriod ||

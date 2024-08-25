@@ -1,6 +1,5 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 
-import CustomSelect from '../components/CustomSelect'
 import { UNITS } from '../constants'
 import { DEFAULT_LOCALE_EN } from '../locale'
 import { HoursProps } from '../types'
@@ -21,6 +20,7 @@ export default function Hours(props: HoursProps) {
     mode,
     allowClear,
     filterOption,
+    SelectComponent
   } = props
   const internalClassName = useMemo(
     () =>
@@ -39,7 +39,7 @@ export default function Hours(props: HoursProps) {
         <span>{locale.prefixHours || DEFAULT_LOCALE_EN.prefixHours}</span>
       )}
 
-      <CustomSelect
+      <SelectComponent
         placeholder={locale.emptyHours || DEFAULT_LOCALE_EN.emptyHours}
         value={value}
         unit={UNITS[1]}

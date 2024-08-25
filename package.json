@@ -1,8 +1,8 @@
 {
-  "name": "react-js-cron",
+  "name": "react-cron-headless",
   "version": "5.0.1",
-  "description": "A React cron editor with antd inspired by jqCron",
-  "author": "Xavier Rutayisire <xavier.rutayisire@gmail.com> (https://github.com/xrutayisire/)",
+  "description": "A headless react cron editor",
+  "author": "Maksim Kuznetsov (https://github.com/maksimkuznetsov/)",
   "license": "MIT",
   "keywords": [
     "react",
@@ -13,19 +13,17 @@
     "editor",
     "widget",
     "generator",
-    "antd",
-    "ant-design",
     "cronjob",
     "schedule",
     "parser"
   ],
-  "homepage": "https://github.com/xrutayisire/react-js-cron#readme",
+  "homepage": "https://github.com/maksimkuznetsov/react-cron#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xrutayisire/react-js-cron.git"
+    "url": "git+https://github.com/maksimkuznetsov/react-cron.git"
   },
   "bugs": {
-    "url": "https://github.com/xrutayisire/react-js-cron/issues"
+    "url": "https://github.com/maksimkuznetsov/react-cron/issues"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -63,7 +61,6 @@
     "enhanced-resolve": "5.10.0"
   },
   "peerDependencies": {
-    "antd": ">=5.8.0",
     "react": ">=17.0.0",
     "react-dom": ">=17.0.0"
   },
